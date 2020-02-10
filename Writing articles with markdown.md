@@ -11,6 +11,7 @@
 [Pandoc中的Markdown语法](https://www.cnblogs.com/baiyangcao/p/pandoc_markdown.html)
 [Markdown下LaTeX公式、编号、对齐](https://www.zybuluo.com/fyywy520/note/82980)
 [Online LaTeX Equation Editor](http://latex.codecogs.com/eqneditor/editor.php)
+[WordPress中实现Markdown编辑的终极解决方案](https://oldpan.me/archives/wordpress-markdown-ultra-solution)
 
 ##环境的搭建
 
@@ -71,9 +72,9 @@ pandoc --filter pandoc-fignos --filter pandoc-citeproc --bibliography=myref.bib 
 此文最后发布时，使用pandoc转换遇到了一些障碍，文中第一张图采用了html标签插入，使用pandoc未能成功转换，这里建议需要word版的需求的话尽可能使用纯Markdown完成。
 
 关于如何发布到Wordpress，网上各路大神的方法很多，这里笔者直接使用了`markdown-preview-enhanced`的自带功能，直接在预览区右键，导出HTML文本，后直接粘贴在Wordpress中完成。
-PS：Wordpress5以后选择HTML块粘贴即可，注意修改HTML开头的css链接，我直接将`markdown-preview-enhanced`文件夹存放在了服务器的`wp-content/styles`目录下，开头的css链接修改为了
+PS：Wordpress5以后选择HTML块粘贴即可，注意修改HTML开头的css链接，我直接将`packages`文件夹存放在了服务器的根目录下，开头的css链接修改为了
 ```
-<link rel="stylesheet" href="./wp-content/styles/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+<link rel="stylesheet" href="./packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
 ```
 ![](https://gitee.com/Astral/img/raw/master/blog/截屏2020-02-10下午3.02.15.png)
 代码部分我的Wordpress使用了插件`CodeColorer`，编辑`wp-content/plugins/codecolorer/codecolorer-options.php`
@@ -81,6 +82,8 @@ PS：Wordpress5以后选择HTML块粘贴即可，注意修改HTML开头的css链
 158行附近的`$options['inline'] =false;`修改为`true`即可。
 PS：vim中使用:`set nu` 可显示行号。修改完成后Wordpress的`<code>`标签默认为内联模式，而markdown解析的行内代码使用的`<code>`标签，单行代码使用的`<pre>`标签，最终显示效果接近，如本文样式。
 
-不知什么原因，`escaped`设置为`true`后转移自负`&lt;`可以正常显示为`<`，而`'`依然显示为`&apos;`，禁用插件`CodeColorer`后恢复。为兼容以前的文章，暂时保留`CodeColorer`，下次进行站点迁移时考虑放弃使用该插件，涉及代码的文章均采用word直接发布到Wordpress或使用Markdown的形式发布。
+不知什么原因，`escaped`设置为`true`后转义字符`&lt;`可以正常显示为`<`，而`'`依然显示为`&apos;`，禁用插件`CodeColorer`后恢复。为兼容以前的文章，暂时保留`CodeColorer`，下次进行站点迁移时考虑放弃使用该插件，涉及代码的文章均采用word直接发布到Wordpress或使用Markdown的形式发布。
+
+当然，如果文章中未使用公式，也可以直接使用插件`WP Githuber MD`，直接在编辑器中粘贴Markdown的内容即可，不过在不实用`CodeColorer`插件时展示的代码效果不太好。
 
 更多用法在探索后更新
